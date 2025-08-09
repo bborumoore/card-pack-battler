@@ -20,5 +20,5 @@ Players take turns drafting preset packs of cards, build main and side decks, an
 
 ### Initial Clone
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/bborumoore/card-pack-battler
 cd card-pack-battler
