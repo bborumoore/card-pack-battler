@@ -1,0 +1,86 @@
+Assets/
+  _Project/                         ← your game code & content (owned by you)
+    Core/                           ← engine‑like stuff used everywhere
+      Runtime/
+        Systems/                    ← GameState, TurnSystem, EventBus, Save/Load
+        Utilities/                  ← helpers, extensions, math, pooling
+        Data/                       ← base ScriptableObjects (Card, Effect, Keyword)
+      Editor/                       ← custom inspectors, validators for Core
+      Core.asmdef
+
+    Features/                       ← vertical slices; each feature self‑contained
+      Drafting/
+        Runtime/
+          Scripts/
+          UI/
+          Prefabs/
+          Data/                     ← SOs for packs/slots/rules
+        Editor/
+        Drafting.asmdef
+      Match/
+        Runtime/
+          Scripts/
+          UI/
+          Prefabs/
+          Data/
+        Editor/
+        Match.asmdef
+      Cards/
+        Runtime/
+          Data/                     ← individual card SOs (one per file)
+          Effects/                  ← effect components/strategies
+          Prefabs/                  ← visual prefab variants (frame, rarity)
+        Editor/
+        Cards.asmdef
+      Networking/                   ← if/when you add it
+        Runtime/
+        Editor/
+        Networking.asmdef
+
+    Presentation/                   ← things shared across features but visual
+      UI/
+        Common/                     ← buttons, panels, toasts, modals
+        Themes/                     ← fonts, colors, spritesheets
+        Prefabs/
+      Audio/
+        Mixers/
+        SFX/preview/                ← short/preview clips only (no raw WAVs)
+        Music/preview/
+      Art/
+        Sprites/
+        Icons/
+        Atlases/
+      Shaders/
+
+    Scenes/
+      Boot/                         ← first scene; loads others additively
+      Menus/
+      Gameplay/
+        Board.unity
+        DraftPhase.unity
+        MatchPhase.unity
+        UI.unity
+      Sandbox/                      ← throwaway scenes for testing
+
+    Config/                         ← text configs safe to diff
+      Balance/                      ← JSON/CSV for tunables
+      Build/                        ← build profiles, defines
+      Input/
+      Localization/                 ← tables (CSV/JSON)
+
+    Tools/
+      Editor/                       ← one‑off editors, validators, CI hooks
+      Importers/                    ← asset postprocessors
+
+    Tests/
+      EditMode/
+      PlayMode/
+
+  ThirdParty/                       ← external packages you don’t edit
+    <PackageName>/
+      Runtime/
+      Editor/
+      <PackageName>.asmdef
+
+  Addressables/                     ← (optional, later) groups & catalogs
+  ExternalAssets/                   ← (ignored) downloaded heavy assets
