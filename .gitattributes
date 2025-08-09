@@ -1,0 +1,22 @@
+# Unity YAML merge for scenes/prefabs/materials
+*.unity  merge=unityyamlmerge eol=lf text
+*.prefab merge=unityyamlmerge eol=lf text
+*.anim   merge=unityyamlmerge eol=lf text
+*.mat    merge=unityyamlmerge eol=lf text
+
+# Treat common text as text
+*.cs     text eol=lf diff=csharp
+*.shader text eol=lf
+*.cginc  text eol=lf
+*.json   text eol=lf
+*.yml    text eol=lf
+*.yaml   text eol=lf
+*.md     text eol=lf
+
+# Binary (don’t diff)
+*.png    binary
+*.jpg    binary
+*.wav    binary
+*.mp3    binary
+*.fbx    binary
+*.psd    binary

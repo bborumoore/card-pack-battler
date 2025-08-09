@@ -1,0 +1,21 @@
+# Unity
+[Ll]ibrary/
+[Tt]emp/
+[Bb]uild*/
+[Ll]ogs/
+[Mm]emoryCaptures/
+UserSettings/
+.obj/
+.vs/
+*.user
+*.csproj
+*.sln
+*.pidb
+*.userprefs
+
+# Addressables build artifacts (keep source, ignore builds)
+Assets/Addressables/*/catalog_*.json
+Assets/Addressables/*/bin*/
+
+# External assets (pulled via rclone or similar)
+ExternalAssets/
