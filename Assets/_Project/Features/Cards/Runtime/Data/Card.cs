@@ -18,39 +18,17 @@ namespace CardPackBattler.Features.Cards
 
         [Header("Presentation")]
         [SerializeField] private Sprite artwork;
-        [SerializeField] private Rarity rarity = Rarity.Common;
-        [SerializeField] private Keyword keywords = 0;
-
-        [Header("Costs / Tunables")]
-        [Min(0)] [SerializeField] private int cost = 0;
 
         [Header("Effects (evaluated in order)")]
-        [SerializeField] private List<CardEffect> effects = new List<CardEffect>();
+        [SerializeField] public List<CardEffect> effects = new List<CardEffect>();
+        [SerializeField] public List<int> CardEffectValues = new List<int>();
 
         // ——— Public API ———
         public string Id => id;
         public string DisplayName => displayName;
         public string RulesText => rulesText;
         public Sprite Artwork => artwork;
-        public Rarity CardRarity => rarity;
-        public Keyword Keywords => keywords;
-        public int Cost => cost;
         public IReadOnlyList<CardEffect> Effects => effects;
-
-        /// <summary>
-        /// Compute the total stat deltas this card contributes for the round.
-        /// (Your round resolver can sum these across all played cards.)
-        /// </summary>
-        public RoundTally ComputeTally()
-        {
-            var tally = RoundTally.Zero;
-            for (int i = 0; i < effects.Count; i++)
-            {
-                var e = effects[i];
-                if (e != null) e.Apply(ref tally);
-            }
-            return tally;
-        }
 
 #if UNITY_EDITOR
         private void OnValidate()
@@ -61,23 +39,19 @@ namespace CardPackBattler.Features.Cards
 
             // Ensure effects list has no null holes.
             effects.RemoveAll(e => e == null);
+
+            // Grow or shrink CardEffectValues to match effects list
+            if (CardEffectValues.Count < effects.Count)
+            {
+                while (CardEffectValues.Count < effects.Count)
+                CardEffectValues.Add(0);
+            }
+            else if (CardEffectValues.Count > effects.Count)
+            {
+                while (CardEffectValues.Count > effects.Count)
+                CardEffectValues.RemoveRange(effects.Count, CardEffectValues.Count - effects.Count);
+            }
         }
 #endif
-    }
-
-    public enum Rarity { Common, Uncommon, Rare, Epic, Legendary }
-
-    /// <summary>
-    /// Card keywords as bit flags (combine multiples).
-    /// </summary>
-    [System.Flags]
-    public enum Keyword
-    {
-        None     = 0,
-        Grapple  = 1 << 0,
-        Expose   = 1 << 1,
-        Shield   = 1 << 2,
-        Pierce   = 1 << 3,
-        // Add more as design evolves
     }
 }
